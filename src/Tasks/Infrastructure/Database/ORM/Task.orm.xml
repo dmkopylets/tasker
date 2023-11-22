@@ -1,0 +1,32 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Tasks\Domain\Entity\Task" table="tasks">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <many-to-one field="user_id" target-entity="App\Users\Domain\Entity\User" inversed-by="tasks">
+            <join-column name="user_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+
+        <field name="status" type="task_status" column="status">
+            <options>
+                <option name="default">todo</option>
+            </options>
+        </field>
+        <field name="priority" type="task_priority" column="priority">
+            <options>
+                <option name="default">5</option>
+            </options>
+        </field>
+        <field name="title" length="30" nullable="true"/>
+        <field name="description" length="255" nullable="true"/>
+        <field name="createdAt" column="created_at" type="datetime_immutable"/>
+        <field name="completedAt" column="completed_at" type="datetime_immutable" nullable="true"/>
+
+    </entity>
+
+</doctrine-mapping>

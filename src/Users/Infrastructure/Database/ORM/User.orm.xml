@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Users\Domain\Entity\User" table="users_user">
+        <id name="id" type="string" length="26">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="email" column="email" type="string" length="180" unique="true" nullable="false" />
+        <field name="phone" column="phone" type="string" length="12" nullable="true" />
+        <field name="password" column="password" type="string" length="20" nullable="false" />
+
+        <one-to-many field="tasks" target-entity="App\Tasks\Domain\Entity\Task" mapped-by="owner" orphan-removal="true" />
+
+    </entity>
+
+</doctrine-mapping>
