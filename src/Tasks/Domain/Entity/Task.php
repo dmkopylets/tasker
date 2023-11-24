@@ -16,7 +16,22 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private string $id;
+
+    #[ORM\Column(length: 26, nullable: false)]
+    private string $user_id;
+
+    #[ORM\Column(nullable: false)]
+    private string $lft;
+
+    #[ORM\Column(nullable: false)]
+    private string $rgt;
+
+    #[ORM\Column(nullable: false)]
+    private string $level;
+
+    #[ORM\Column(nullable: false)]
+    private string $root_id;
 
     #[ORM\Column(type: 'task_status', length: 4)]
     private ?string $status = null;
@@ -35,9 +50,6 @@ class Task
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $completedAt = null;
-
-    #[ORM\Column(length: 26)]
-    private ?string $user_id = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
